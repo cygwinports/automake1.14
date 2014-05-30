@@ -1,5 +1,5 @@
 NAME="automake1.14"
-VERSION=1.14
+VERSION=1.14.1
 RELEASE=1
 CATEGORY="Devel"
 SUMMARY="(1.14) a tool for generating GNU-compliant Makefiles"
@@ -20,7 +20,10 @@ src_compile() {
         # avoid cygautoreconf since we are not patching
         # any Makefile.am's or configure.ac. Also helps
         # to avoid circular dependency on previously-installed
-        # automake1.14
+        # automake1.14.  However, we do want to pull in most
+	# recent config.guess/config.sub
+	gnuconfigize ${S}/lib
+
 	cd ${B}
 	cygconf
 	cygmake -j1
